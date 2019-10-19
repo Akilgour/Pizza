@@ -9,4 +9,10 @@
     <PackageReference Include="Autofac" Version="4.9.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Pizza.Constants\Pizza.Constants.csproj" />
+    <ProjectReference Include="..\Pizza.Interface\Pizza.Interface.csproj" />
+    <ProjectReference Include="..\Pizza.Model\Pizza.Model.csproj" />
+  </ItemGroup>
+
 </Project>
