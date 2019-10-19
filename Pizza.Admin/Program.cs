@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac;
+using Pizza.Admin.Autofac;
 
 namespace Pizza.Admin
 {
@@ -6,7 +7,12 @@ namespace Pizza.Admin
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // Setup the DI container
+            var container = AutofacConfiguration.Configure();
+
+            var task = container.Resolve<Application>().Run(args);
+            task.Wait();
+
         }
     }
 }
