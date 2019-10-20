@@ -1,18 +1,22 @@
 ﻿using Pizza.Interface.Service;
 using Pizza.Model.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Pizza.Service.Manager.Interface;
 using System.Threading.Tasks;
 
 namespace Pizza.Service.Service
 {
     public class PizzaOrderService : IPizzaOrderService
     {
+        private readonly IPizzaOrderManager pizzaOrderManager;
+
+        public PizzaOrderService(IPizzaOrderManager pizzaOrderManager)
+        {
+            this.pizzaOrderManager = pizzaOrderManager;
+        }
+
         public async Task AddOrder(PizzaOrderDTO pizzaOrder)
         {
-            throw new NotImplementedException();
+            await pizzaOrderManager.AddOrder(pizzaOrder);
         }
     }
 }

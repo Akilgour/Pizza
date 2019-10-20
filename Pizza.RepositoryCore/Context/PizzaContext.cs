@@ -13,7 +13,7 @@ namespace Pizza.RepositoryCore.Context
         public PizzaContext(AsyncRetryPolicy asyncRetryPolicy) : base(asyncRetryPolicy)
         { }
 
-        [Obsolete("The is only here so EF has a parameterless constuctor, DO NOT USE for anything else.", true)]
+      //  [Obsolete("The is only here so EF has a parameterless constuctor, DO NOT USE for anything else.", true)]
         public PizzaContext() : base(null)
         { }
 

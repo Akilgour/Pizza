@@ -89,11 +89,11 @@ namespace Pizza.RepositoryCore.Context
         /// </summary>
         public async Task Save()
         {
-
-            await _asyncRetryPolicy.ExecuteAsync(async () =>
-            {
-                return await SaveChangesAsync();
-            });
+            //TODO Add polly
+         //   await _asyncRetryPolicy.ExecuteAsync(async () =>
+         //   {
+                  await SaveChangesAsync();
+        //    });
 
 
         }

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Pizza.Service.Autofac;
 
 namespace Pizza.Admin.Autofac
 {
@@ -9,6 +10,8 @@ namespace Pizza.Admin.Autofac
             var builder = new ContainerBuilder();
 
             builder.RegisterType<Application>();
+
+            builder.RegisterModule(new PizzaServiceModule());
 
             // Set the dependency resolver to be Autofac.
             return builder.Build();

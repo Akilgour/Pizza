@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -13,6 +13,7 @@
     <ProjectReference Include="..\Pizza.Constants\Pizza.Constants.csproj" />
     <ProjectReference Include="..\Pizza.Interface\Pizza.Interface.csproj" />
     <ProjectReference Include="..\Pizza.Model\Pizza.Model.csproj" />
+    <ProjectReference Include="..\Pizza.Service\Pizza.Service.csproj" />
   </ItemGroup>
 
 </Project>
