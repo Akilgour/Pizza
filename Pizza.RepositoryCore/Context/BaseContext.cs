@@ -20,6 +20,9 @@ namespace Pizza.RepositoryCore.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=Pizza;  Trusted_Connection=Yes;");
+
+            //The EF log will have the save values.
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         /// <summary>
@@ -42,6 +45,17 @@ namespace Pizza.RepositoryCore.Context
             Set<T>().Add(entity);
 
             return entity;
+        }
+
+        public async void AddRange<T>(IEnumerable<T> entity) where T : BaseModel
+        {
+            foreach (var item in entity)
+            {
+                item.Id = Guid.NewGuid();
+                item.LastModifiedDate = DateTime.UtcNow;
+                item.CreatedDate = DateTime.UtcNow;
+            }
+            await Set<T>().AddRangeAsync(entity);
         }
 
         /// <summary>
@@ -87,20 +101,20 @@ namespace Pizza.RepositoryCore.Context
         /// <summary>
         /// Saves the changes to the database.
         /// </summary>
-        public async Task Save()
+        public async Task SaveChangesAsync()
         {
             //TODO Add polly
-         //   await _asyncRetryPolicy.ExecuteAsync(async () =>
-         //   {
-                  await SaveChangesAsync();
-        //    });
+            //   await _asyncRetryPolicy.ExecuteAsync(async () =>
+            //   {
+            await base.SaveChangesAsync();
+            //    });
 
 
         }
 
         public void SaveSync()
         {
-            SaveChanges();
+            base.SaveChanges();
         }
 
 

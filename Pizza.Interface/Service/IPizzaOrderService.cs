@@ -10,5 +10,6 @@ namespace Pizza.Interface.Service
     public interface IPizzaOrderService
     {
         Task AddOrder(PizzaOrderDTO pizzaOrder);
+        Task AddMultipleOrder(List<PizzaOrderDTO> list);
     }
 }
