@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Logging;
 using Pizza.RepositoryCore.Context;
 using Pizza.RepositoryCore.Logging;
@@ -39,7 +41,10 @@ namespace Pizza.RepositoryCore.Repository
         {
             try
             {
-                context.Create(pizzaOrder);
+                //   context.Create(pizzaOrder);
+
+                context.ChangeTracker.TrackGraph(pizzaOrder, e => ApplyStateUsingIsKeySet(e.Entry));
+
                 await context.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -47,5 +52,19 @@ namespace Pizza.RepositoryCore.Repository
                 throw ex;
             }
         }
+
+        //TODO Refactor into helper with TESTS
+        public static void ApplyStateUsingIsKeySet(EntityEntry entity)
+        {
+            if (entity.IsKeySet)
+            {
+                entity.State = EntityState.Unchanged;
+            }
+            else
+            {
+                entity.State = EntityState.Added;
+            }
+        }
+
     }
 }
