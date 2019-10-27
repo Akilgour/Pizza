@@ -10,12 +10,6 @@ namespace Pizza.Repository.Model
         [Key]
         [Required]
         [Column(Order = 0)]
-        public Guid Id { get; set; }
-
-        [Required]
-        public DateTime CreatedDate { get; set; }
-
-        [Required]
-        public DateTime LastModifiedDate { get; set; }
+        public Guid Id { get; set; }     
     }
 }

@@ -3,6 +3,7 @@ using Pizza.Repository.Model;
 using Polly.Retry;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,6 +26,15 @@ namespace Pizza.RepositoryCore.Context
             optionsBuilder.EnableSensitiveDataLogging();
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                modelBuilder.Entity(entityType.Name).Property<DateTime>("LastModified");
+                modelBuilder.Entity(entityType.Name).Property<DateTime>("Created");
+            }
+        }
+
         /// <summary>
         /// Sets the default properties of the business object and adds it
         /// to the EF <see cref="DbSet"/>.
@@ -39,11 +49,7 @@ namespace Pizza.RepositoryCore.Context
                 entity.Id = Guid.NewGuid();
             }
 
-            entity.LastModifiedDate = DateTime.UtcNow;
-            entity.CreatedDate = DateTime.UtcNow;
-
             Set<T>().Add(entity);
-
             return entity;
         }
 
@@ -52,8 +58,6 @@ namespace Pizza.RepositoryCore.Context
             foreach (var item in entity)
             {
                 item.Id = Guid.NewGuid();
-                item.LastModifiedDate = DateTime.UtcNow;
-                item.CreatedDate = DateTime.UtcNow;
             }
             await Set<T>().AddRangeAsync(entity);
         }
@@ -103,6 +107,16 @@ namespace Pizza.RepositoryCore.Context
         /// </summary>
         public async Task SaveChangesAsync()
         {
+            foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added ||
+             e.State== EntityState.Modified))
+            {
+                entry.Property("LastModified").CurrentValue = DateTime.UtcNow;
+            }
+
+            foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added ))
+            {
+                entry.Property("Created").CurrentValue = DateTime.UtcNow;
+            }
             //TODO Add polly
             //   await _asyncRetryPolicy.ExecuteAsync(async () =>
             //   {
