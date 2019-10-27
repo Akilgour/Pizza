@@ -15,3 +15,7 @@ Script-Migration -Idempotent
 
 How to add logging
 https://docs.microsoft.com/en-us/ef/core/miscellaneous/logging?tabs=v3
+
+
+?? Object tracking
+http://trackableentities.github.io/
