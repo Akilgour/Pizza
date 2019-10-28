@@ -8,6 +8,7 @@ using Pizza.RepositoryCore.Model;
 using Pizza.RepositoryCore.Repository.Interface;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Pizza.RepositoryCore.Repository
@@ -15,27 +16,45 @@ namespace Pizza.RepositoryCore.Repository
     public class PizzaOrderRepository : IPizzaOrderRepository
     {
         private readonly PizzaContext context;
+        private DbContextOptions options;
 
         public PizzaOrderRepository(PizzaContext context)
         {
             this.context = context;
-            context.GetService<ILoggerFactory>().AddProvider(new MyLoggerProvider());
+          //TODO PUT BACK IN  context.GetService<ILoggerFactory>().AddProvider(new MyLoggerProvider());
+        }
+
+        public PizzaOrderRepository(DbContextOptions options)
+        {
+            this.options = options;
         }
 
         public async Task AddRange(List<PizzaOrder> pizzaOrders)
         {
             try
             {
-              
-
-             context.AddRange(pizzaOrders);
-                  context.SaveChanges();
+                context.AddRange(pizzaOrders);
+                context.SaveChanges();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
+
+        public async Task<List<PizzaOrder>> GetByBaseType(string baseType)
+        {
+            try
+            {
+                var result = await context.PizzaOrder.Where(x => x.BaseType == baseType).ToListAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
 
         public async Task Create(PizzaOrder pizzaOrder)
         {

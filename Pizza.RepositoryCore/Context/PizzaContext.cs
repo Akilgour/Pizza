@@ -7,17 +7,24 @@ using System.Text;
 
 namespace Pizza.RepositoryCore.Context
 {
-    public class PizzaContext : BaseContext
+    public class PizzaContext :  BaseContext
     {
+
+
+        public PizzaContext(DbContextOptions options) : base(options)
+        {
+        }
 
         public PizzaContext(AsyncRetryPolicy asyncRetryPolicy) : base(asyncRetryPolicy)
         { }
 
-      //  [Obsolete("The is only here so EF has a parameterless constuctor, DO NOT USE for anything else.", true)]
-        public PizzaContext() : base(null)
-        { }
-
+        public PizzaContext() : base()
+        {
+        }
+      
 
         public virtual DbSet<PizzaOrder> PizzaOrder { get; set; }
+
+
     }
 }

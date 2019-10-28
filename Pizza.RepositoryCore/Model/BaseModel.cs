@@ -10,6 +10,8 @@ namespace Pizza.Repository.Model
         [Key]
         [Required]
         [Column(Order = 0)]
-        public Guid Id { get; set; }     
+        //TODO AK Put in, will probably need to script a db update
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public Guid Id { get; set; }
     }
 }

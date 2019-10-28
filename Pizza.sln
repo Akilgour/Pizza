@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pizza.Shared", "Pizza.Share
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pizza.Service", "Pizza.Service\Pizza.Service.csproj", "{6A3BC37A-466C-4931-A2A5-9377C7FA477E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pizza.Repository.Test", "Pizza.Repository.Test\Pizza.Repository.Test.csproj", "{EBED4385-4C39-4160-BF3C-081A9A527102}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pizza.RepositoryCore.Test", "Pizza.Repository.Test\Pizza.RepositoryCore.Test.csproj", "{EBED4385-4C39-4160-BF3C-081A9A527102}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pizza.Service.Test", "Pizza.Service.Test\Pizza.Service.Test.csproj", "{4F1C54BF-C1B2-4A8C-A7A8-DB91298C383F}"
 EndProject

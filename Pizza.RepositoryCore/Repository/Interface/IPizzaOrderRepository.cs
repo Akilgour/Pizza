@@ -8,5 +8,6 @@ namespace Pizza.RepositoryCore.Repository.Interface
     {
         Task Create(PizzaOrder pizzaOrder);
         Task AddRange(List<PizzaOrder> pizzaOrders);
+        Task<List<PizzaOrder>> GetByBaseType(string baseType);
     }
 }

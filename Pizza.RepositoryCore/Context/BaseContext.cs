@@ -12,18 +12,31 @@ namespace Pizza.RepositoryCore.Context
     public abstract class BaseContext : DbContext
     {
         private readonly AsyncRetryPolicy _asyncRetryPolicy;
+        
 
         public BaseContext(AsyncRetryPolicy asyncRetryPolicy)
         {
             _asyncRetryPolicy = asyncRetryPolicy;
         }
 
+        protected BaseContext(DbContextOptions options) : base(options)
+        {
+           
+        }
+
+        protected BaseContext()
+        {
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=Pizza;  Trusted_Connection=Yes;");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=Pizza;  Trusted_Connection=Yes;");
 
-            //The EF log will have the save values.
-            optionsBuilder.EnableSensitiveDataLogging();
+                //The EF log will have the save values.
+                optionsBuilder.EnableSensitiveDataLogging();
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

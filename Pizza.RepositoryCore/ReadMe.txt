@@ -19,3 +19,8 @@ https://docs.microsoft.com/en-us/ef/core/miscellaneous/logging?tabs=v3
 
 ?? Object tracking
 http://trackableentities.github.io/
+
+Testing
+Install-package Microsoft.EntityFrameworkCore.InMemory
+Install-Package NUnit 
+Install-Package NUnit3TestAdapter
