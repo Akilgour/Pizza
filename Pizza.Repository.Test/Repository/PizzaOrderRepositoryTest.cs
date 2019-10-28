@@ -1,11 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Pizza.RepositoryCore.Context;
-using Pizza.RepositoryCore.Repository.Interface;
-using System;
-using System.Collections.Generic;
+using Pizza.RepositoryCore.Test;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Pizza.RepositoryCore.Repository
@@ -13,31 +9,23 @@ namespace Pizza.RepositoryCore.Repository
     [TestFixture]
     public class PizzaOrderRepositoryTest
     {
-
-        [SetUp]
-        public void SetUp()
-        {
-            var options = new DbContextOptionsBuilder<PizzaContext>()
-           .UseInMemoryDatabase("InMemoryDatabase").Options;
-            var context = new PizzaContext(options);
-
-            context.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thick" });
-            context.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thick" });
-            context.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thick" });
-            context.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thin" });
-            context.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thin" });
-            context.SaveChanges();
-        }
-
         [TestCase("thick", 3)]
         [TestCase("thin", 2)]
         [TestCase("none", 0)]
         public async Task GetByBaseTypeAsync(string baseType, int expected)
         {
             //arrange
-            var options = new DbContextOptionsBuilder<PizzaContext>()
-            .UseInMemoryDatabase("InMemoryDatabase").Options;
-            var context = new PizzaContext(options);
+            var option = DbContextOptionsBuilderFactory.Create();
+            var arrangeContext = new PizzaContext(option);
+
+            arrangeContext.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thick" });
+            arrangeContext.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thick" });
+            arrangeContext.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thick" });
+            arrangeContext.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thin" });
+            arrangeContext.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thin" });
+            arrangeContext.SaveChanges();
+
+            var context = new PizzaContext(option);
             var pizzaOrderRepository = new PizzaOrderRepository(context);
             //act
             var value = await pizzaOrderRepository.GetByBaseType(baseType);
