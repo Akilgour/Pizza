@@ -119,6 +119,7 @@ namespace Pizza.RepositoryCore.Context
         /// </summary>
         public async Task SaveChangesAsync()
         {
+            ChangeTracker.DetectChanges();
             //Setting a var so the date time is the same for create and update on brand new items
             var now = DateTime.UtcNow;
 
