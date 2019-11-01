@@ -55,25 +55,25 @@ namespace Pizza.RepositoryCore.Context
         /// <typeparam name="T">The business object type.</typeparam>
         /// <param name="entity">The entity to be added.</param>
         /// <returns>The updated entity.</returns>
-        public T Create<T>(T entity) where T : BaseModel
-        {
-            if (entity.Id == Guid.Empty)
-            {
-                entity.Id = Guid.NewGuid();
-            }
+        //public T Create<T>(T entity) where T : BaseModel
+        //{
+        //    if (entity.Id == Guid.Empty)
+        //    {
+        //        entity.Id = Guid.NewGuid();
+        //    }
 
-            Set<T>().Add(entity);
-            return entity;
-        }
+        //    Set<T>().Add(entity);
+        //    return entity;
+        //}
 
-        public async void AddRange<T>(IEnumerable<T> entity) where T : BaseModel
-        {
-            foreach (var item in entity)
-            {
-                item.Id = Guid.NewGuid();
-            }
-            await Set<T>().AddRangeAsync(entity);
-        }
+        //public async void AddRange<T>(IEnumerable<T> entity) where T : BaseModel
+        //{
+        //    foreach (var item in entity)
+        //    {
+        //        item.Id = Guid.NewGuid();
+        //    }
+        //    await Set<T>().AddRangeAsync(entity);
+        //}
 
         /// <summary>
         /// Removes the specified <paramref name="entity"/> from its EF <see cref="DbSet"/>.

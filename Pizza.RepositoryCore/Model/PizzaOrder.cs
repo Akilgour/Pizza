@@ -1,9 +1,12 @@
 ﻿using Pizza.Repository.Model;
+using System;
 
 namespace Pizza.RepositoryCore.Model
 {
     public class PizzaOrder : BaseModel
     {
+       public Guid Id { get; set; }
+
         public string BaseType { get; set; }
       
         public string SauceType { get; set; }

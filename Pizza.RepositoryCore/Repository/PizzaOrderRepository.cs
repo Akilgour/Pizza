@@ -34,7 +34,7 @@ namespace Pizza.RepositoryCore.Repository
             try
             {
                 await context.AddRangeAsync(pizzaOrders);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
