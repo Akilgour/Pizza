@@ -119,15 +119,18 @@ namespace Pizza.RepositoryCore.Context
         /// </summary>
         public async Task SaveChangesAsync()
         {
+            //Setting a var so the date time is the same for create and update on brand new items
+            var now = DateTime.UtcNow;
+
             foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added ||
              e.State== EntityState.Modified))
             {
-                entry.Property("LastModified").CurrentValue = DateTime.UtcNow;
+                entry.Property("LastModified").CurrentValue = now;
             }
 
             foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added ))
             {
-                entry.Property("Created").CurrentValue = DateTime.UtcNow;
+                entry.Property("Created").CurrentValue = now ;
             }
             //TODO Add polly
             //   await _asyncRetryPolicy.ExecuteAsync(async () =>
