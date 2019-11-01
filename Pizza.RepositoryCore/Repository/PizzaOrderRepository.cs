@@ -1,9 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.Extensions.Logging;
 using Pizza.RepositoryCore.Context;
-using Pizza.RepositoryCore.Logging;
 using Pizza.RepositoryCore.Model;
 using Pizza.RepositoryCore.Repository.Interface;
 using System;
@@ -21,7 +18,7 @@ namespace Pizza.RepositoryCore.Repository
         public PizzaOrderRepository(PizzaContext context)
         {
             this.context = context;
-          //TODO PUT BACK IN  context.GetService<ILoggerFactory>().AddProvider(new MyLoggerProvider());
+            //TODO PUT BACK IN  context.GetService<ILoggerFactory>().AddProvider(new MyLoggerProvider());
         }
 
         public PizzaOrderRepository(DbContextOptions options)
@@ -54,7 +51,6 @@ namespace Pizza.RepositoryCore.Repository
                 throw ex;
             }
         }
-
 
         public async Task Create(PizzaOrder pizzaOrder)
         {
@@ -89,13 +85,33 @@ namespace Pizza.RepositoryCore.Repository
         {
             try
             {
-               return await context.PizzaOrder.OrderBy(x => EF.Property<DateTime>(x, "Created")).ToListAsync();
+                return await context.PizzaOrder.OrderBy(x => EF.Property<DateTime>(x, "Created")).ToListAsync();
             }
-            catch (Exception  )
+            catch (Exception)
             {
-                throw  ;
+                throw;
             }
         }
 
+        public async Task<List<PizzaOrderWithDetails>> GetAllWithDetails()
+        {
+            try
+            {
+                var result = await context.PizzaOrder.Select(x => new PizzaOrderWithDetails()
+                {
+                    BaseType = x.BaseType,
+                    SauceType = x.SauceType,
+                    SizeInCM = x.SizeInCM,
+                    Created = EF.Property<DateTime>(x, "Created"),
+                    LastModified = EF.Property<DateTime>(x, "LastModified")
+                }).ToListAsync();
+
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

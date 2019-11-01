@@ -12,5 +12,6 @@ namespace Pizza.Interface.Service
         Task AddOrder(PizzaOrderDTO pizzaOrder);
         Task AddMultipleOrder(List<PizzaOrderDTO> list);
         Task<List<PizzaOrderDTO>> GetAll();
+        Task<List<PizzaOrderWithDetailsDTO>> GetAllWithDetails();
     }
 }

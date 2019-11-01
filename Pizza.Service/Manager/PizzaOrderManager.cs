@@ -61,5 +61,24 @@ namespace Pizza.Service.Manager
             }
             return pizzaOrderDTOs;
         }
+
+        public async Task<List<PizzaOrderWithDetailsDTO>> GetAllWithDetails()
+        {
+            var pizzaOrders = await pizzaOrderRepository.GetAllWithDetails();
+            var PizzaOrderWithDetailsDTOs = new List<PizzaOrderWithDetailsDTO>();
+            foreach (var item in pizzaOrders)
+            {
+                PizzaOrderWithDetailsDTOs.Add(new PizzaOrderWithDetailsDTO()
+                {
+                    SauceType = item.SauceType,
+                    BaseType = item.BaseType,
+                    SizeInCM = item.SizeInCM,
+                    Created = item.Created,
+                    LastModified = item.LastModified
+                });
+            }
+            return PizzaOrderWithDetailsDTOs;
+        }
+
     }
 }
