@@ -33,7 +33,7 @@ namespace Pizza.RepositoryCore.Repository
         {
             try
             {
-                context.AddRange(pizzaOrders);
+                await context.AddRangeAsync(pizzaOrders);
                 context.SaveChanges();
             }
             catch (Exception ex)
