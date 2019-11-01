@@ -85,5 +85,17 @@ namespace Pizza.RepositoryCore.Repository
             }
         }
 
+        public async Task<List<PizzaOrder>> GetAll()
+        {
+            try
+            {
+               return await context.PizzaOrder.OrderBy(x => EF.Property<DateTime>(x, "Created")).ToListAsync();
+            }
+            catch (Exception  )
+            {
+                throw  ;
+            }
+        }
+
     }
 }

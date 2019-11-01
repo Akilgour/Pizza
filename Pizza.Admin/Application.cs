@@ -24,6 +24,7 @@ namespace Pizza.Admin
                 Console.WriteLine(" 1. Add Large Pizza to Orders");
                 Console.WriteLine(" 2. Add Small Pizza to Orders");
                 Console.WriteLine(" 3. Add Two Small Pizza to Orders");
+                Console.WriteLine(" 4. Get All");
 
                 Console.WriteLine(" 0. Exit");
                 keyPress = Console.ReadKey().KeyChar;
@@ -40,6 +41,16 @@ namespace Pizza.Admin
 
                     case '3':
                         await pizzaService.AddMultipleOrder(new List<PizzaOrderDTO>() { SmallPizzaFactory.Create(), SmallPizzaFactory.Create() });
+                        break;
+
+                    case '4':
+                        var allPizzas = await pizzaService.GetAll();
+
+                        foreach (var item in allPizzas)
+                        {
+                            Console.WriteLine($" Base {item.BaseType} {item.SauceType} {item.SizeInCM} ");
+                        }
+
                         break;
 
                     default:

@@ -24,5 +24,10 @@ namespace Pizza.Service.Service
         {
             await pizzaOrderManager.AddOrder(pizzaOrder);
         }
+
+        public async Task<List<PizzaOrderDTO>> GetAll()
+        {
+            return await pizzaOrderManager.GetAll();
+        }
     }
 }

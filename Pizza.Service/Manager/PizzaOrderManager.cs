@@ -22,7 +22,7 @@ namespace Pizza.Service.Manager
             //TODO Use automapper, that still need to be set up
             foreach (var item in pizzaOrderDTOs)
             {
-                pizzaOrders.Add( new PizzaOrder()
+                pizzaOrders.Add(new PizzaOrder()
                 {
                     SauceType = item.SauceType,
                     BaseType = item.BaseType,
@@ -44,6 +44,22 @@ namespace Pizza.Service.Manager
             };
 
             await pizzaOrderRepository.Create(pizzaOrder);
+        }
+
+        public async Task<List<PizzaOrderDTO>> GetAll()
+        {
+            var pizzaOrders = await pizzaOrderRepository.GetAll();
+            var pizzaOrderDTOs = new List<PizzaOrderDTO>();
+            foreach (var item in pizzaOrders)
+            {
+                pizzaOrderDTOs.Add(new PizzaOrderDTO()
+                {
+                    SauceType = item.SauceType,
+                    BaseType = item.BaseType,
+                    SizeInCM = item.SizeInCM
+                });
+            }
+            return pizzaOrderDTOs;
         }
     }
 }
