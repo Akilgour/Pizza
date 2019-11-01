@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Pizza.Repository.Model;
 using Polly.Retry;
 using System;
 using System.Collections.Generic;
@@ -80,15 +79,15 @@ namespace Pizza.RepositoryCore.Context
         /// </summary>
         /// <typeparam name="T">The type of business object to delete.</typeparam>
         /// <param name="entity">The entity to delete.</param>
-        public virtual void Delete<T>(T entity) where T : BaseModel
-        {
-            if (Entry(entity).State == EntityState.Detached)
-            {
-                Set<T>().Attach(entity);
-            }
+        //public virtual void Delete<T>(T entity) where T : BaseModel
+        //{
+        //    if (Entry(entity).State == EntityState.Detached)
+        //    {
+        //        Set<T>().Attach(entity);
+        //    }
 
-            Set<T>().Remove(entity);
-        }
+        //    Set<T>().Remove(entity);
+        //}
 
         /// <summary>
         /// Sets the <paramref name="entity"/> as updated, and attaches it to the context if it is detached.

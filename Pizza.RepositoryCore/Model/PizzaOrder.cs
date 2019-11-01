@@ -1,9 +1,8 @@
-﻿using Pizza.Repository.Model;
-using System;
+﻿using System;
 
 namespace Pizza.RepositoryCore.Model
 {
-    public class PizzaOrder : BaseModel
+    public class PizzaOrder
     {
        public Guid Id { get; set; }
 
