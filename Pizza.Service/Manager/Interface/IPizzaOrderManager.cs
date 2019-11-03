@@ -15,5 +15,6 @@ namespace Pizza.Service.Manager.Interface
         Task<List<PizzaOrderDTO>> GetAll();
         Task<List<PizzaOrderWithDetailsDTO>> GetAllWithDetails();
         Task<List<PizzaOrderDTO>> GetAllForHarrison();
+        Task GiveJohnsToRingos();
     }
 }

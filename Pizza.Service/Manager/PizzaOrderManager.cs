@@ -41,7 +41,7 @@ namespace Pizza.Service.Manager
                 SauceType = pizzaOrderDTO.SauceType,
                 BaseType = pizzaOrderDTO.BaseType,
                 SizeInCM = pizzaOrderDTO.SizeInCM,
-                OrderFor = new PersonFullName(pizzaOrderDTO.GivenName, pizzaOrderDTO.SurName)                
+                OrderFor = new PersonFullName(pizzaOrderDTO.GivenName, pizzaOrderDTO.SurName)
             };
 
             await pizzaOrderRepository.Create(pizzaOrder);
@@ -99,5 +99,17 @@ namespace Pizza.Service.Manager
             return PizzaOrderWithDetailsDTOs;
         }
 
+        public async Task GiveJohnsToRingos()
+        {
+            var pizzaOrders = await pizzaOrderRepository.GetAllWithSurName("Lennon");
+
+            foreach (var item in pizzaOrders)
+            {
+                item.OrderFor.GivenName = "Ringo";
+                item.OrderFor.SurName = "Starr";
+                await pizzaOrderRepository.Save(item);
+            }
+
+        }
     }
 }

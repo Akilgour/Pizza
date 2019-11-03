@@ -126,5 +126,13 @@ namespace Pizza.RepositoryCore.Repository
                 throw;
             }
         }
+
+        public async Task Save(PizzaOrder item)
+        {
+            var pizzaOrder = await context.PizzaOrder.FirstAsync(x => x.Id == item.Id);
+            pizzaOrder.OrderFor.GivenName = item.OrderFor.GivenName;
+            pizzaOrder.OrderFor.SurName = item.OrderFor.SurName;
+            await context.SaveChangesAsync();
+        }
     }
 }

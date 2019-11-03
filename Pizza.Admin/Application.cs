@@ -27,6 +27,8 @@ namespace Pizza.Admin
                 Console.WriteLine(" 4. Get All");
                 Console.WriteLine(" 5. Get All With Details");
                 Console.WriteLine(" 6. Get All For Harrison");
+                Console.WriteLine(" 7. Give Johns To Ringos");
+
                 Console.WriteLine(" 0. Exit");
                 keyPress = Console.ReadKey().KeyChar;
 
@@ -69,6 +71,11 @@ namespace Pizza.Admin
                         {
                             Console.WriteLine($" Base: {item.BaseType} SauceType: {item.SauceType} Size: {item.SizeInCM}cm For: {item.GivenName} {item.SurName}  ");
                         }
+                        break;
+
+                    case '7':
+
+                        await pizzaService.GiveJohnsToRingos();
                         break;
                     default:
                         break;
