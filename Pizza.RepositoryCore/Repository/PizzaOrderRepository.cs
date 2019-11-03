@@ -93,6 +93,19 @@ namespace Pizza.RepositoryCore.Repository
             }
         }
 
+        public async Task<List<PizzaOrder>> GetAllWithSurName(string surName)
+        {
+            try
+            {
+                return await context.PizzaOrder.Where(x => x.OrderFor.SurName == surName)
+                                                .OrderBy(x => EF.Property<DateTime>(x, "Created")).ToListAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<List<PizzaOrderWithDetails>> GetAllWithDetails()
         {
             try

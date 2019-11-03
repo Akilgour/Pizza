@@ -26,6 +26,7 @@ namespace Pizza.Admin
                 Console.WriteLine(" 3. Add Two Small Pizza to Orders");
                 Console.WriteLine(" 4. Get All");
                 Console.WriteLine(" 5. Get All With Details");
+                Console.WriteLine(" 6. Get All For Harrison");
                 Console.WriteLine(" 0. Exit");
                 keyPress = Console.ReadKey().KeyChar;
 
@@ -59,7 +60,15 @@ namespace Pizza.Admin
                         {
                             Console.WriteLine($" Base: {item.BaseType} SauceType: {item.SauceType} Size: {item.SizeInCM}cm Created: {item.Created}  LastModified: {item.LastModified}  ");
                         }
+                        break;
 
+                    case '6':
+                        var allPizzasForHarrision = await pizzaService.GetAllForHarrison();
+
+                        foreach (var item in allPizzasForHarrision)
+                        {
+                            Console.WriteLine($" Base: {item.BaseType} SauceType: {item.SauceType} Size: {item.SizeInCM}cm For: {item.GivenName} {item.SurName}  ");
+                        }
                         break;
                     default:
                         break;

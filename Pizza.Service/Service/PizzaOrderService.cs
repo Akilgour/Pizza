@@ -30,6 +30,11 @@ namespace Pizza.Service.Service
             return await pizzaOrderManager.GetAll();
         }
 
+        public async Task<List<PizzaOrderDTO>> GetAllForHarrison()
+        {
+            return await pizzaOrderManager.GetAllForHarrison();
+        }
+
         public async Task<List<PizzaOrderWithDetailsDTO>> GetAllWithDetails()
         {
             return await pizzaOrderManager.GetAllWithDetails();

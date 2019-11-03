@@ -7,5 +7,7 @@
         public string SauceType { get; set; }
 
         public int SizeInCM { get; set; }
+        public string GivenName { get; set; }
+        public string SurName { get; set; }
     }
 }

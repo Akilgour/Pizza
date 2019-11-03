@@ -11,5 +11,6 @@ namespace Pizza.RepositoryCore.Repository.Interface
         Task<List<PizzaOrder>> GetByBaseType(string baseType);
         Task<List<PizzaOrder>> GetAll();
         Task<List<PizzaOrderWithDetails>> GetAllWithDetails();
+        Task<List<PizzaOrder>> GetAllWithSurName(string surName);
     }
 }

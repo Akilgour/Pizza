@@ -7,7 +7,13 @@ namespace Pizza.Admin.Factory
     {
         public static PizzaOrderDTO Create()
         {
-            return new PizzaOrderDTO() { BaseType = PizzaBaseType.Thin, SauceType = PizzaSauceType.Tommato, SizeInCM = 24 };
+            return new PizzaOrderDTO() { 
+                BaseType = PizzaBaseType.Thin,
+                SauceType = PizzaSauceType.Tommato, 
+                SizeInCM = 24,
+                GivenName = "George",
+                SurName = "Harrison"
+            };
         }
     }
 }
