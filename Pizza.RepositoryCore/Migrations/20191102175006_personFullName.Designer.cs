@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pizza.RepositoryCore.Context;
 
 namespace Pizza.RepositoryCore.Migrations
 {
     [DbContext(typeof(PizzaContext))]
-    partial class PizzaContextModelSnapshot : ModelSnapshot
+    [Migration("20191102175006_personFullName")]
+    partial class personFullName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,8 +49,7 @@ namespace Pizza.RepositoryCore.Migrations
 
                             b1.Property<DateTime>("Created");
 
-                            b1.Property<string>("GivenName")
-                                .HasColumnName("GivenName");
+                            b1.Property<string>("GivenName");
 
                             b1.Property<DateTime>("LastModified");
 

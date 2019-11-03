@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Pizza.RepositoryCore.Model;
 using Polly.Retry;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,8 @@ namespace Pizza.RepositoryCore.Context
                 modelBuilder.Entity(entityType.Name).Property<DateTime>("LastModified");
                 modelBuilder.Entity(entityType.Name).Property<DateTime>("Created");
             }
+
+             modelBuilder.Entity<PizzaOrder>().OwnsOne(x => x.OrderFor).Property(x => x.GivenName).HasColumnName("GivenName");
         }
 
         /// <summary>
