@@ -28,6 +28,7 @@ namespace Pizza.Admin
                 Console.WriteLine(" 5. Get All With Details");
                 Console.WriteLine(" 6. Get All For Harrison");
                 Console.WriteLine(" 7. Give Johns To Ringos");
+                Console.WriteLine(" 8. Get Count");
 
                 Console.WriteLine(" 0. Exit");
                 keyPress = Console.ReadKey().KeyChar;
@@ -74,8 +75,13 @@ namespace Pizza.Admin
                         break;
 
                     case '7':
-
                         await pizzaService.GiveJohnsToRingos();
+                        break;
+                    case '8':
+                        Console.WriteLine($" John Lennon: {  await pizzaService.GetPizzaOrderCountBySurName("Lennon") }");
+                        Console.WriteLine($" Paul Mccartney: {  await pizzaService.GetPizzaOrderCountBySurName("Mccartney") }");
+                        Console.WriteLine($" George Harrison: {  await pizzaService.GetPizzaOrderCountBySurName("Harrison") }");
+                        Console.WriteLine($" Ringo Starr: {  await pizzaService.GetPizzaOrderCountBySurName("Starr") }");
                         break;
                     default:
                         break;

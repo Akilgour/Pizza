@@ -16,5 +16,6 @@ namespace Pizza.Service.Manager.Interface
         Task<List<PizzaOrderWithDetailsDTO>> GetAllWithDetails();
         Task<List<PizzaOrderDTO>> GetAllForHarrison();
         Task GiveJohnsToRingos();
+        Task<int> GetPizzaOrderCountBySurName(string surName);
     }
 }

@@ -99,6 +99,11 @@ namespace Pizza.Service.Manager
             return PizzaOrderWithDetailsDTOs;
         }
 
+        public async Task<int> GetPizzaOrderCountBySurName(string surName)
+        {
+           return await pizzaOrderRepository.GetPizzaOrderCountBySurName(surName);
+        }
+
         public async Task GiveJohnsToRingos()
         {
             var pizzaOrders = await pizzaOrderRepository.GetAllWithSurName("Lennon");
@@ -111,5 +116,6 @@ namespace Pizza.Service.Manager
             }
 
         }
+    
     }
 }

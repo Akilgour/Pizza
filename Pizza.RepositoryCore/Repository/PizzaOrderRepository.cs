@@ -133,5 +133,20 @@ namespace Pizza.RepositoryCore.Repository
             pizzaOrder.OrderFor = PersonFullName.Create(item.OrderFor.GivenName, item.OrderFor.SurName);
             await context.SaveChangesAsync();
         }
+
+        public async Task<int> GetPizzaOrderCountBySurName(string surName)
+        {
+            var foo = await context.PizzaOrder.Select(x => new { x.BaseType, Count = PizzaContext.PizzaOrderCountBySurName(surName) } ).ToListAsync();
+
+            if(foo.Count == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return foo.First().Count;
+            }
+
+        }
     }
 }

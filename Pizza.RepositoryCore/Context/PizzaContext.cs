@@ -26,5 +26,10 @@ namespace Pizza.RepositoryCore.Context
         public virtual DbSet<PizzaOrder> PizzaOrder { get; set; }
 
 
+        [DbFunction(Schema = "dbo")]
+        public static int PizzaOrderCountBySurName(string surName)
+        {
+            throw new Exception("This will get thrown if someone trys to call it as a method, but not if called from linq");
+        }
     }
 }

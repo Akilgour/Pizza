@@ -40,9 +40,14 @@ namespace Pizza.Service.Service
             return await pizzaOrderManager.GetAllWithDetails();
         }
 
+        public async Task<int> GetPizzaOrderCountBySurName(string surName)
+        {
+            return await pizzaOrderManager.GetPizzaOrderCountBySurName(surName);
+        }
+
         public async Task GiveJohnsToRingos()
         {
-              await pizzaOrderManager.GiveJohnsToRingos();
+            await pizzaOrderManager.GiveJohnsToRingos();
         }
     }
 }
