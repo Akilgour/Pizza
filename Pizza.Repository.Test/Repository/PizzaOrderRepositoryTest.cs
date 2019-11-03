@@ -18,11 +18,11 @@ namespace Pizza.RepositoryCore.Repository
             var option = DbContextOptionsBuilderFactory.Create();
             var arrangeContext = new PizzaContext(option);
 
-            arrangeContext.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thick" });
-            arrangeContext.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thick" });
-            arrangeContext.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thick" });
-            arrangeContext.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thin" });
-            arrangeContext.PizzaOrder.Add(new Model.PizzaOrder() { BaseType = "thin" });
+            arrangeContext.PizzaOrders.Add(new Model.PizzaOrder() { BaseType = "thick" });
+            arrangeContext.PizzaOrders.Add(new Model.PizzaOrder() { BaseType = "thick" });
+            arrangeContext.PizzaOrders.Add(new Model.PizzaOrder() { BaseType = "thick" });
+            arrangeContext.PizzaOrders.Add(new Model.PizzaOrder() { BaseType = "thin" });
+            arrangeContext.PizzaOrders.Add(new Model.PizzaOrder() { BaseType = "thin" });
             arrangeContext.SaveChanges();
 
             var context = new PizzaContext(option);

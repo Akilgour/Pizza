@@ -23,7 +23,8 @@ namespace Pizza.RepositoryCore.Context
         }
       
 
-        public virtual DbSet<PizzaOrder> PizzaOrder { get; set; }
+        public virtual DbSet<PizzaOrder> PizzaOrders { get; set; }
+        public virtual DbQuery<PizzaOrderStats> PizzaOrderStats { get; set; }
 
 
         [DbFunction(Schema = "dbo")]

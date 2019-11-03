@@ -20,5 +20,6 @@ namespace Pizza.Interface.Service
 
         Task<int> GetPizzaOrderCountBySurName(string surName);
         Task<List<PizzaOrderWithTimeDTO>> GetAllWithTime();
+        Task<List<PizzaOrderStatsDTO>> GetPizzaOrderStats();
     }
 }

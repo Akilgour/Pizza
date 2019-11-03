@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Pizza.Model.Model;
 using Pizza.RepositoryCore.Context;
 using Pizza.RepositoryCore.Model;
 using Pizza.RepositoryCore.Repository.Interface;
@@ -43,7 +44,7 @@ namespace Pizza.RepositoryCore.Repository
         {
             try
             {
-                var result = await context.PizzaOrder.Where(x => x.BaseType == baseType).ToListAsync();
+                var result = await context.PizzaOrders.Where(x => x.BaseType == baseType).ToListAsync();
                 return result;
             }
             catch (Exception ex)
@@ -85,7 +86,7 @@ namespace Pizza.RepositoryCore.Repository
         {
             try
             {
-                return await context.PizzaOrder.OrderBy(x => EF.Property<DateTime>(x, "Created")).ToListAsync();
+                return await context.PizzaOrders.OrderBy(x => EF.Property<DateTime>(x, "Created")).ToListAsync();
             }
             catch (Exception)
             {
@@ -97,7 +98,7 @@ namespace Pizza.RepositoryCore.Repository
         {
             try
             {
-                return await context.PizzaOrder.Where(x => x.OrderFor.SurName == surName)
+                return await context.PizzaOrders.Where(x => x.OrderFor.SurName == surName)
                                                 .OrderBy(x => EF.Property<DateTime>(x, "Created")).ToListAsync();
             }
             catch (Exception)
@@ -110,7 +111,7 @@ namespace Pizza.RepositoryCore.Repository
         {
             try
             {
-                var result = await context.PizzaOrder.Select(x => new PizzaOrderWithDetails()
+                var result = await context.PizzaOrders.Select(x => new PizzaOrderWithDetails()
                 {
                     BaseType = x.BaseType,
                     SauceType = x.SauceType,
@@ -129,22 +130,22 @@ namespace Pizza.RepositoryCore.Repository
 
         public async Task Save(PizzaOrder item)
         {
-            var pizzaOrder = await context.PizzaOrder.FirstAsync(x => x.Id == item.Id);
+            var pizzaOrder = await context.PizzaOrders.FirstAsync(x => x.Id == item.Id);
             pizzaOrder.OrderFor = PersonFullName.Create(item.OrderFor.GivenName, item.OrderFor.SurName);
             await context.SaveChangesAsync();
         }
 
         public async Task<int> GetPizzaOrderCountBySurName(string surName)
         {
-            var foo = await context.PizzaOrder.Select(x => new { x.BaseType, Count = PizzaContext.PizzaOrderCountBySurName(surName) } ).ToListAsync();
+            var pizzaOrders = await context.PizzaOrders.Select(x => new { x.BaseType, Count = PizzaContext.PizzaOrderCountBySurName(surName) } ).ToListAsync();
 
-            if(foo.Count == 0)
+            if(pizzaOrders.Count == 0)
             {
                 return 0;
             }
             else
             {
-                return foo.First().Count;
+                return pizzaOrders.First().Count;
             }
 
         }
@@ -153,7 +154,7 @@ namespace Pizza.RepositoryCore.Repository
         {
             try
             {
-                var result = await context.PizzaOrder.Select(x => new PizzaOrderWithTime()
+                var result = await context.PizzaOrders.Select(x => new PizzaOrderWithTime()
                 {
                     BaseType = x.BaseType,
                     SauceType = x.SauceType,
@@ -174,6 +175,11 @@ namespace Pizza.RepositoryCore.Repository
         private static double HowOld(DateTime dateTime)
         {
             return (DateTime.UtcNow - dateTime).TotalMinutes;
+        }
+
+        public async Task<List<PizzaOrderStats>> GetPizzaOrderStats()
+        {
+            return await context.PizzaOrderStats.ToListAsync();
         }
     }
 }

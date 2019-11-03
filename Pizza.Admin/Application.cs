@@ -30,6 +30,8 @@ namespace Pizza.Admin
                 Console.WriteLine(" 7. Give Johns To Ringos");
                 Console.WriteLine(" 8. Get Count");
                 Console.WriteLine(" 9. AllWithTime");
+                Console.WriteLine(" q. Get Stats");
+                ;
 
                 Console.WriteLine(" 0. Exit");
                 keyPress = Console.ReadKey().KeyChar;
@@ -90,6 +92,14 @@ namespace Pizza.Admin
                         foreach (var item in allWithTime)
                         {
                             Console.WriteLine($" Base: {item.BaseType} SauceType: {item.SauceType} Size: {item.SizeInCM}cm For:  {item.HowOld.ToString()}min {item.HowOldHours}hours  ");
+                        }
+                        break;
+
+                    case 'q':
+                        var pizzaOrderStats = await pizzaService.GetPizzaOrderStats();
+                        foreach (var item in pizzaOrderStats)
+                        {
+                            Console.WriteLine($" Base: {item.BaseType} SauceType: {item.SauceType} Size: {item.SizeInCM}cm For: TotalOrders  {item.TotalOrders}  ");
                         }
                         break;
                     default:

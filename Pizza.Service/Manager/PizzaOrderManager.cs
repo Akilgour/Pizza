@@ -122,6 +122,26 @@ namespace Pizza.Service.Manager
             return await pizzaOrderRepository.GetPizzaOrderCountBySurName(surName);
         }
 
+        public async Task<List<PizzaOrderStatsDTO>> GetPizzaOrderStats()
+        {
+            var pizzaOrders = await pizzaOrderRepository.GetPizzaOrderStats();
+            var pizzaOrderStatsDTOs = new List<PizzaOrderStatsDTO>();
+
+            foreach (var item in pizzaOrders)
+            {
+                pizzaOrderStatsDTOs.Add(new PizzaOrderStatsDTO()
+                {
+                    SauceType = item.SauceType,
+                    BaseType = item.BaseType,
+                    SizeInCM = item.SizeInCM,
+                    GivenName = item.GivenName,
+                    OrderFor_SurName = item.OrderFor_SurName,
+                    TotalOrders = item.TotalOrders
+                });
+            }
+            return pizzaOrderStatsDTOs;
+        }
+
         public async Task GiveJohnsToRingos()
         {
             var pizzaOrders = await pizzaOrderRepository.GetAllWithSurName("Lennon");

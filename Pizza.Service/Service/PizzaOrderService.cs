@@ -54,5 +54,10 @@ namespace Pizza.Service.Service
         {
           return  await pizzaOrderManager.GetAllWithTime();
         }
+
+        public async Task<List<PizzaOrderStatsDTO>> GetPizzaOrderStats()
+        {
+            return await pizzaOrderManager.GetPizzaOrderStats();
+        }
     }
 }

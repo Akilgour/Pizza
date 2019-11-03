@@ -1,4 +1,5 @@
-﻿using Pizza.RepositoryCore.Model;
+﻿using Pizza.Model.Model;
+using Pizza.RepositoryCore.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,5 +16,6 @@ namespace Pizza.RepositoryCore.Repository.Interface
         Task Save(PizzaOrder item);
         Task<int> GetPizzaOrderCountBySurName(string surName);
         Task<List<PizzaOrderWithTime>> GetAllWithTime();
+        Task<List<PizzaOrderStats>> GetPizzaOrderStats();
     }
 }

@@ -43,11 +43,16 @@ namespace Pizza.RepositoryCore.Context
         {
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
-                modelBuilder.Entity(entityType.Name).Property<DateTime>("LastModified");
-                modelBuilder.Entity(entityType.Name).Property<DateTime>("Created");
+                //If not a type of view, add DateTime LastModified and Created
+                if (entityType.ClrType.BaseType != typeof(DbView))
+                {
+                    modelBuilder.Entity(entityType.Name).Property<DateTime>("LastModified");
+                    modelBuilder.Entity(entityType.Name).Property<DateTime>("Created");
+                }
             }
 
              modelBuilder.Entity<PizzaOrder>().OwnsOne(x => x.OrderFor).Property(x => x.GivenName).HasColumnName("GivenName");
+             modelBuilder.Query<PizzaOrderStats>().ToView("PizzaOrderStats");
         }
 
         /// <summary>
