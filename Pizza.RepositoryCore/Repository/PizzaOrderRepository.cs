@@ -1,7 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.Logging;
 using Pizza.Model.Model;
 using Pizza.RepositoryCore.Context;
+using Pizza.RepositoryCore.Logging;
 using Pizza.RepositoryCore.Model;
 using Pizza.RepositoryCore.Repository.Interface;
 using System;
@@ -19,7 +22,7 @@ namespace Pizza.RepositoryCore.Repository
         public PizzaOrderRepository(PizzaContext context)
         {
             this.context = context;
-            //TODO PUT BACK IN  context.GetService<ILoggerFactory>().AddProvider(new MyLoggerProvider());
+            context.GetService<ILoggerFactory>().AddProvider(new MyLoggerProvider());
         }
 
         public PizzaOrderRepository(DbContextOptions options)
