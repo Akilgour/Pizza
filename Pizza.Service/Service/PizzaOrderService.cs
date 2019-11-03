@@ -49,5 +49,10 @@ namespace Pizza.Service.Service
         {
             await pizzaOrderManager.GiveJohnsToRingos();
         }
+
+        public async Task<List<PizzaOrderWithTimeDTO>> GetAllWithTime()
+        {
+          return  await pizzaOrderManager.GetAllWithTime();
+        }
     }
 }

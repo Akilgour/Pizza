@@ -14,5 +14,6 @@ namespace Pizza.RepositoryCore.Repository.Interface
         Task<List<PizzaOrder>> GetAllWithSurName(string surName);
         Task Save(PizzaOrder item);
         Task<int> GetPizzaOrderCountBySurName(string surName);
+        Task<List<PizzaOrderWithTime>> GetAllWithTime();
     }
 }

@@ -148,5 +148,32 @@ namespace Pizza.RepositoryCore.Repository
             }
 
         }
+
+        public async Task<List<PizzaOrderWithTime>> GetAllWithTime()
+        {
+            try
+            {
+                var result = await context.PizzaOrder.Select(x => new PizzaOrderWithTime()
+                {
+                    BaseType = x.BaseType,
+                    SauceType = x.SauceType,
+                    SizeInCM = x.SizeInCM,
+                    HowOld = HowOld(EF.Property<DateTime>(x, "Created")),
+                    HowOldHours = EF.Functions.DateDiffHour(DateTime.UtcNow, EF.Property<DateTime>(x, "Created")) 
+
+                }).ToListAsync();
+
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private static double HowOld(DateTime dateTime)
+        {
+            return (DateTime.UtcNow - dateTime).TotalMinutes;
+        }
     }
 }

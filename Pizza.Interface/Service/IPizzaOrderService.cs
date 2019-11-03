@@ -19,5 +19,6 @@ namespace Pizza.Interface.Service
         Task GiveJohnsToRingos();
 
         Task<int> GetPizzaOrderCountBySurName(string surName);
+        Task<List<PizzaOrderWithTimeDTO>> GetAllWithTime();
     }
 }

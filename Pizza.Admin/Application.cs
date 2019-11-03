@@ -29,6 +29,7 @@ namespace Pizza.Admin
                 Console.WriteLine(" 6. Get All For Harrison");
                 Console.WriteLine(" 7. Give Johns To Ringos");
                 Console.WriteLine(" 8. Get Count");
+                Console.WriteLine(" 9. AllWithTime");
 
                 Console.WriteLine(" 0. Exit");
                 keyPress = Console.ReadKey().KeyChar;
@@ -82,6 +83,14 @@ namespace Pizza.Admin
                         Console.WriteLine($" Paul Mccartney: {  await pizzaService.GetPizzaOrderCountBySurName("Mccartney") }");
                         Console.WriteLine($" George Harrison: {  await pizzaService.GetPizzaOrderCountBySurName("Harrison") }");
                         Console.WriteLine($" Ringo Starr: {  await pizzaService.GetPizzaOrderCountBySurName("Starr") }");
+                        break;
+
+                    case '9':
+                        var allWithTime = await pizzaService.GetAllWithTime();
+                        foreach (var item in allWithTime)
+                        {
+                            Console.WriteLine($" Base: {item.BaseType} SauceType: {item.SauceType} Size: {item.SizeInCM}cm For:  {item.HowOld.ToString()}min {item.HowOldHours}hours  ");
+                        }
                         break;
                     default:
                         break;

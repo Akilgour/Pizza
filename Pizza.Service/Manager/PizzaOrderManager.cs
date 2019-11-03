@@ -99,9 +99,27 @@ namespace Pizza.Service.Manager
             return PizzaOrderWithDetailsDTOs;
         }
 
+        public async Task<List<PizzaOrderWithTimeDTO>> GetAllWithTime()
+        {
+            var pizzaOrders = await pizzaOrderRepository.GetAllWithTime();
+            var pizzaOrderWithTimeDTOs = new List<PizzaOrderWithTimeDTO>();
+            foreach (var item in pizzaOrders)
+            {
+                pizzaOrderWithTimeDTOs.Add(new PizzaOrderWithTimeDTO()
+                {
+                    SauceType = item.SauceType,
+                    BaseType = item.BaseType,
+                    SizeInCM = item.SizeInCM,
+                    HowOld = item.HowOld,
+                    HowOldHours = item.HowOldHours
+                });
+            }
+            return pizzaOrderWithTimeDTOs;
+        }
+
         public async Task<int> GetPizzaOrderCountBySurName(string surName)
         {
-           return await pizzaOrderRepository.GetPizzaOrderCountBySurName(surName);
+            return await pizzaOrderRepository.GetPizzaOrderCountBySurName(surName);
         }
 
         public async Task GiveJohnsToRingos()
@@ -116,6 +134,6 @@ namespace Pizza.Service.Manager
             }
 
         }
-    
+
     }
 }
