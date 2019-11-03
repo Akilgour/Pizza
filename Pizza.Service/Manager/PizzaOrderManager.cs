@@ -41,7 +41,7 @@ namespace Pizza.Service.Manager
                 SauceType = pizzaOrderDTO.SauceType,
                 BaseType = pizzaOrderDTO.BaseType,
                 SizeInCM = pizzaOrderDTO.SizeInCM,
-                OrderFor = new PersonFullName(pizzaOrderDTO.GivenName, pizzaOrderDTO.SurName)
+                OrderFor = PersonFullName.Create(pizzaOrderDTO.GivenName, pizzaOrderDTO.SurName)
             };
 
             await pizzaOrderRepository.Create(pizzaOrder);
@@ -105,8 +105,8 @@ namespace Pizza.Service.Manager
 
             foreach (var item in pizzaOrders)
             {
-                item.OrderFor.GivenName = "Ringo";
-                item.OrderFor.SurName = "Starr";
+                item.OrderFor = PersonFullName.Create("Ringo", "Starr");
+
                 await pizzaOrderRepository.Save(item);
             }
 

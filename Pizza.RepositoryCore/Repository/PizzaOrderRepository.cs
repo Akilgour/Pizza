@@ -130,8 +130,7 @@ namespace Pizza.RepositoryCore.Repository
         public async Task Save(PizzaOrder item)
         {
             var pizzaOrder = await context.PizzaOrder.FirstAsync(x => x.Id == item.Id);
-            pizzaOrder.OrderFor.GivenName = item.OrderFor.GivenName;
-            pizzaOrder.OrderFor.SurName = item.OrderFor.SurName;
+            pizzaOrder.OrderFor = PersonFullName.Create(item.OrderFor.GivenName, item.OrderFor.SurName);
             await context.SaveChangesAsync();
         }
     }
